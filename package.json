@@ -1,0 +1,18 @@
+{
+  "name": "commander-utils",
+  "version": "0.0.1",
+  "description": "some commander.js utility functions",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/subtub/commander-utils.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "mocha": "1.12.1"
+  }
+}
