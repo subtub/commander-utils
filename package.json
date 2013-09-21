@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "request": "2.27.0",
-    "semver": "2.1.0"
+    "semver": "2.1.0",
+    "shelljs": "0.2.4"
   },
   "devDependencies": {
     "mocha": "1.12.1",
