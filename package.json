@@ -11,7 +11,8 @@
     "test": "make test"
   },
   "dependencies": {
-    
+    "request": "2.27.0",
+    "semver": "2.1.0"
   },
   "devDependencies": {
     "mocha": "1.12.1",
