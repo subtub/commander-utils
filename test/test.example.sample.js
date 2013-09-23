@@ -9,6 +9,12 @@ describe('example/sample', function() {
   it('execute the sample cli without command or option.', function() {
     exec(path);
   })
+  it('execute the sample cli with update command and --help option.', function() {
+    exec(path+'update --help');
+  })
+  it('execute the sample cli with update command and --check option.', function() {
+    exec(path+'update --check');
+  })
   it('execute the sample cli with --help option.', function() {
     exec(path+'--help');
   })
