@@ -7,22 +7,22 @@ describe('example/sample', function() {
   var path = 'node '+process.cwd()+'/example/sample ';
 
   it('execute the sample cli without command or option.', function() {
-  	exec(path);
+    exec(path);
   })
   it('execute the sample cli with --help option.', function() {
-  	exec(path+'--help');
+    exec(path+'--help');
   })
   it('execute the sample cli with --version option.', function() {
-  	exec(path+'--version');
+    exec(path+'--version');
   })
   it('execute the sample cli with --subtub option.', function() {
-  	exec(path+'--subtub');
+    exec(path+'--subtub');
   })
   it('execute the sample cli with --subtub and --silent option.', function() {
-  	exec(path+'--subtub --silent');
+    exec(path+'--subtub --silent');
   })
   it('execute the sample cli with --subtub and --colorless option.', function() {
-  	exec(path+'--subtub --colorless');
+    exec(path+'--subtub --colorless');
   })
 
 })
