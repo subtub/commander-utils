@@ -11,7 +11,7 @@ var programUtils = new CommanderUtils(program, packageJson);
 programUtils.setVersion();
 programUtils.addLogOptions();
 programUtils.commandUpdate({packageJsonUrl: 'https://raw.github.com/subtub/commander-utils/master/package.json',
-                            installUrl: 'https://github.com/subtub/commander-utils/tarball/master'});
+                            downloadUrl: 'https://github.com/subtub/commander-utils/tarball/master'});
 
 program
   .option('-s, --subtub', 'subtub says hello')
