@@ -7,9 +7,9 @@ var programUtils = new CommanderUtils(program, pkg);
 
 describe('lib/index.js', function() {
   
-  describe('#version()', function() {
+  describe('#setVersion()', function() {
     it('should return the version of the commander.js tool.', function() {
-      assert.equal( pkg.version, programUtils.version() );
+      assert.equal( pkg.version, programUtils.setVersion() );
     })
   })
 
