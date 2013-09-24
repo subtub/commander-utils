@@ -13,6 +13,15 @@ describe('lib/index.js', function() {
     })
   })
 
+  describe('#checkIfNewVersion()', function() {
+    it('should return true if the cli tool is the latest release.', function() {
+      assert.equal( false, programUtils.checkIfNewVersion('1.0.0', '1.0.0') );
+    })
+    it('should return false if a new release is available.', function() {
+      assert.equal( true, programUtils.checkIfNewVersion('1.0.0', '2.0.0') );
+    })
+  })
+
   describe('#log()', function() {
     describe('#setSilent()', function() {
       it('should return true.', function() {
