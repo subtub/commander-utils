@@ -15,6 +15,18 @@ describe('lib/index.js', function() {
       assert.equal( pkg.version, programUtils.setVersion('1.0.0') );
     })
   })
+
+  describe('#requestPackageJson()', function() {
+    it('should return the requested package.json as object.', function() {
+      programUtils.requestPackageJson('https://github.com/subtub/commander-utils/raw/master/package.json', function(data) {
+        assert.equal( typeof data === 'object', data );
+      })
+    })
+    it('should return false if the request end with an error.', function() {
+      programUtils.requestPackageJson('not/correct/url', function(data) {
+        assert.equal( false, data );
+      })
+    })
   })
 
   describe('#checkIfNewVersion()', function() {
