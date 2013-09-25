@@ -1,4 +1,7 @@
-test:
+hint:
+	@node node_modules/.bin/jshint lib/
+
+test: hint
 	@node node_modules/.bin/mocha --reporter spec
 
 API_PATH = docs/api.md
@@ -13,4 +16,4 @@ docs:
 readme: docs
 	@subtool readme
 
-.PHONY: test docs readme
+.PHONY: hint test docs readme
