@@ -19,6 +19,7 @@
   "devDependencies": {
     "mocha": "1.12.1",
     "jsdox": "0.2.2",
+    "jshint": "2.1.10",
     "commander": "2.0.0"
   }
 }
