@@ -10,4 +10,7 @@ docs:
 	@cat ${API_TMP_PATH} >> ${API_PATH}
 	@rm ${API_TMP_PATH}
 
-.PHONY: test docs
+readme: docs
+	@subtool readme
+
+.PHONY: test docs readme
