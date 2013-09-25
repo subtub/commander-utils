@@ -14,6 +14,7 @@ module.exports = { version: '0.0.1',
     content: [
       { title: 'General Information',  file: '/docs/general_information.md' },
       { title: 'Installation',         file: '/docs/installation.md' },
+      { title: 'API',                  file: '/docs/api.md' },
       { title: 'Running Tests',        file: '/docs/running_tests.md' }
     ]
   },
