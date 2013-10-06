@@ -5,22 +5,30 @@
  */
 var program = require('commander');
 var CommanderUtils = require('../');
+var pkg = require('../package.json');
 
-var packageJson = require('../package.json');
-var programUtils = new CommanderUtils(program, packageJson);
-programUtils.setVersion();
-programUtils.addLogOptions();
-programUtils.commandUpdate({packageJsonUrl: 'https://raw.github.com/subtub/commander-utils/master/package.json',
-                            downloadUrl: 'https://github.com/subtub/commander-utils/tarball/master'});
+/**
+ * Initialize the commander-utils module.
+ */
+CommanderUtils(program, pkg);
+program.initUtils();
 
+/**
+ * Add an option to the commandline interface.
+ */
 program
-  .option('-s, --subtub', 'subtub says hello')
-  .parse(process.argv);
+  .option('-b, --baz', 'baz stuff')
 
-programUtils.checkLogOptions();
-//programUtils.ifNoArgsShowHelp();
+/**
+ * Parse the arguments.
+ */
+program
+  .parse(process.argv)
+  .parseUtils();
 
-
-if (program.subtub) {
-	programUtils.log.info('Hello World');
+/**
+ * If the --baz option is active, do someting.
+ */
+if (program.baz) {
+  program.log.info('Baz to the Box');
 };
