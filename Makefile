@@ -16,4 +16,7 @@ docs:
 readme: docs
 	@subtool readme
 
+report:
+	@node node_modules/.bin/plato -r --title "commander-utils" --dir report lib
+
 .PHONY: hint test docs readme
