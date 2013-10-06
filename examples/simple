@@ -17,7 +17,7 @@ program.initUtils();
  * Add an option to the commandline interface.
  */
 program
-  .option('-b, --baz', 'baz stuff')
+  .option('-f, --foo', 'foo stuff')
 
 /**
  * Parse the arguments.
@@ -27,8 +27,8 @@ program
   .parseUtils();
 
 /**
- * If the --baz option is active, do someting.
+ * If the --foo option is active, do someting.
  */
-if (program.baz) {
-  program.log.info('Baz to the Box');
+if (program.foo) {
+  program.log.info('Foo to the Box');
 };

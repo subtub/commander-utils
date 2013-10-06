@@ -2,21 +2,12 @@ var assert = require('assert');
 var shell = require('shelljs/global');
 
 
-describe('example/sample', function() {
+describe('examples/simple', function() {
   
-  var path = 'node '+process.cwd()+'/example/sample ';
+  var path = 'node '+process.cwd()+'/examples/simple ';
 
   it('execute the sample cli without command or option.', function() {
     exec(path);
-  })
-  it('execute the sample cli with update command.', function() {
-    exec(path+'update');
-  })
-  it('execute the sample cli with update command and --help option.', function() {
-    exec(path+'update --help');
-  })
-  it('execute the sample cli with update command and --check option.', function() {
-    exec(path+'update --check');
   })
   it('execute the sample cli with --help option.', function() {
     exec(path+'--help');
@@ -24,14 +15,14 @@ describe('example/sample', function() {
   it('execute the sample cli with --version option.', function() {
     exec(path+'--version');
   })
-  it('execute the sample cli with --subtub option.', function() {
-    exec(path+'--subtub');
+  it('execute the sample cli with --foo option.', function() {
+    exec(path+'--foo');
   })
-  it('execute the sample cli with --subtub and --silent option.', function() {
-    exec(path+'--subtub --silent');
+  it('execute the sample cli with --foo and --silent option.', function() {
+    exec(path+'--foo --silent');
   })
-  it('execute the sample cli with --subtub and --colorless option.', function() {
-    exec(path+'--subtub --colorless');
+  it('execute the sample cli with --foo and --colorless option.', function() {
+    exec(path+'--foo --colorless');
   })
 
 })
