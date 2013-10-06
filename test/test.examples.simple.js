@@ -2,27 +2,33 @@ var assert = require('assert');
 var shell = require('shelljs/global');
 
 
+var path = 'node '+process.cwd()+'/examples/simple ';
+
+
 describe('examples/simple', function() {
+
+  it('execute the simple cli without command or option.', function() {
+    assert.equal(0, exec(path).code);
+  });
+
+  it('execute the simple cli with --help option.', function() {
+    assert.equal(0, exec(path+'--help').code);
+  });
   
-  var path = 'node '+process.cwd()+'/examples/simple ';
+  it('execute the simple cli with --version option.', function() {
+    assert.equal(0, exec(path+'--version').code);
+  });
+  
+  it('execute the simple cli with --foo option.', function() {
+    assert.equal(0, exec(path+'--foo').code);
+  });
+  
+  it('execute the simple cli with --foo and --silent option.', function() {
+    assert.equal(0, exec(path+'--foo --silent').code);
+  });
+  
+  it('execute the simple cli with --foo and --colorless option.', function() {
+    assert.equal(0, exec(path+'--foo --colorless').code);
+  });
 
-  it('execute the sample cli without command or option.', function() {
-    exec(path);
-  })
-  it('execute the sample cli with --help option.', function() {
-    exec(path+'--help');
-  })
-  it('execute the sample cli with --version option.', function() {
-    exec(path+'--version');
-  })
-  it('execute the sample cli with --foo option.', function() {
-    exec(path+'--foo');
-  })
-  it('execute the sample cli with --foo and --silent option.', function() {
-    exec(path+'--foo --silent');
-  })
-  it('execute the sample cli with --foo and --colorless option.', function() {
-    exec(path+'--foo --colorless');
-  })
-
-})
+});
