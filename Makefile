@@ -6,14 +6,14 @@ test: hint
 
 API_PATH = docs/api.md
 API_TMP_PATH = docs/index.md
-docs: readme
+docs:
 	@rm -rf ${API_PATH}
 	@echo "## API" > ${API_PATH}
 	@node node_modules/.bin/jsdox --output docs lib
 	@cat ${API_TMP_PATH} >> ${API_PATH}
 	@rm ${API_TMP_PATH}
 
-readme:
+readme: docs
 	@node node_modules/.bin/subtool readme
 
 report:
