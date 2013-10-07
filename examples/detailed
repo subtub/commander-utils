@@ -10,16 +10,16 @@ var pkg = require('../package.json');
 /**
  * Initialize the commander-utils module.
  */
-CommanderUtils(program, pkg);
-program.initUtils({
+var CommanderUtilsConfig = {
   version: 'detailed v1.0.0',
-  description: 'This is a detailed commander-utils example tool.',
+  description: 'This is a detailed commander-utils example tool.\nIf we use the config parameter, we can overwrite some packageJson parameter.',
   update: {
     name: 'commander-utils',
     packageJsonUrl: 'https://raw.github.com/subtub/commander-utils/master/package.json',
     downloadUrl: 'https://github.com/subtub/commander-utils/tarball/master'
-  }
-});
+  },
+};
+CommanderUtils(program, pkg, CommanderUtilsConfig);
 
 /**
  * Add a command to the commandline interface.
