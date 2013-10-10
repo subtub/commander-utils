@@ -5,5 +5,3 @@ The simple example initialize the utilitie functions to the commander object. De
 ```
 {{include:/examples/simple}}
 ```
-
-Also there is a  detailed example {{include:/examples/detailed}}
