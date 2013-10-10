@@ -1,6 +1,20 @@
+###
 # General Files
+###
+
 *.DS_Store
 
+
+###
 # Node.js Files
+###
+
 npm-debug.log
 node_modules/
+
+
+###
+# Other Files
+###
+
+docs/api.md

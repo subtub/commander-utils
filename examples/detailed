@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+var program = require('commander');
+var CommanderUtils = require('../');
+var pkg = require('../package.json');
+
+/**
+ * Initialize the commander-utils module.
+ */
+CommanderUtils(program, pkg);
+
+program
+  .setVersionLong('detailed v1.0.0')
+  .setDescription('This is a detailed commander-utils example tool.\nIf we use the config parameter, we can overwrite some packageJson parameter.')
+  .setUpdate({
+    name: 'commander-utils',
+    packageJsonUrl: 'https://raw.github.com/subtub/commander-utils/master/package.json',
+    downloadUrl: 'https://github.com/subtub/commander-utils/tarball/master'
+  });
+
+/**
+ * Add a command to the commandline interface.
+ */
+program
+  .command('subtub')
+  .description('subtub says hello')
+  .option('-f, --foo', 'fizzle foo stuff')
+  .option('-b, --bar', 'order beer at the bar')
+  .action(function(options) {
+    program.log.info('Hello World')
+    if (options.foo) program.log.info('fffooooooooo');
+    if (options.bar) program.log.info('bbbaaaaaarrrrrrrrrr');
+  })
+  .on('--help', function() {
+    program.commandExample({
+      description: 'This is a long description for this command.\nHere you can place a detailed text...',
+      examples: [{description: 'describe this command here.',
+                  command:     'detailed subtub'},
+                 {description: 'describe an other command here.\nYou can also describe the command with multiple lines by using a linebreak at the string.',
+                  command:     'detailed subtub -f'},
+                 {command:     'detailed subtub --foo --bar'}]
+    });
+  });
+
+/**
+ * Add an option to the commandline interface.
+ */
+program
+  .option('-b, --baz', 'baz stuff')
+
+/**
+ * Parse the arguments.
+ */
+program
+  .parseUtils()
+  .parse(process.argv);
+
+/**
+ * If the --baz option is active, do someting.
+ */
+if (program.baz) {
+  program.log.info('Baz to the Box');
+};
