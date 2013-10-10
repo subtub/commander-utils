@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+var program = require('commander');
+var CommanderUtils = require('../');
+var pkg = require('../package.json');
+
+/**
+ * Initialize the commander-utils module.
+ */
+CommanderUtils(program, pkg);
+
+/**
+ * Add an option to the commandline interface.
+ */
+program
+  .option('-f, --foo', 'foo stuff')
+
+/**
+ * Parse the arguments.
+ */
+program
+  .parseUtils()
+  .parse(process.argv);
+
+/**
+ * If the --foo option is active, do someting.
+ */
+if (program.foo) {
+  program.log.info('Foo to the Box');
+};

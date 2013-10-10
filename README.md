@@ -1,7 +1,7 @@
 # commander-utils v0.0.2  
 
 [![Build Status](https://travis-ci.org/subtub/commander-utils.png?branch=master)](https://travis-ci.org/subtub/commander-utils)
-
+[![Coverage Status](https://coveralls.io/repos/subtub/commander-utils/badge.png)](https://coveralls.io/r/subtub/commander-utils)
 ## Table of Content
 
 [General Information](#general-information)  
