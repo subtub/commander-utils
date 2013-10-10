@@ -14,7 +14,7 @@ CommanderUtils(program, pkg);
 
 program
   .setVersionLong('detailed v1.0.0')
-  .setDescription('This is a detailed commander-utils example tool.\nIf we use the config parameter, we can overwrite some packageJson parameter.');
+  .setDescription('This is a detailed commander-utils example tool.\nIf we use the config parameter, we can overwrite some packageJson parameter.')
   .setUpdate({
     name: 'commander-utils',
     packageJsonUrl: 'https://raw.github.com/subtub/commander-utils/master/package.json',
