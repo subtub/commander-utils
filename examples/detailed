@@ -55,8 +55,8 @@ program
  * Parse the arguments.
  */
 program
-  .parse(process.argv)
-  .parseUtils();
+  .parseUtils()
+  .parse(process.argv);
 
 /**
  * If the --baz option is active, do someting.
