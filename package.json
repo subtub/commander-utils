@@ -1,6 +1,6 @@
 {
   "name": "commander-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "some commander.js utility functions",
   "repository": {
     "type": "git",
@@ -13,11 +13,14 @@
   "dependencies": {
     "request": "2.27.0",
     "semver": "2.1.0",
-    "shelljs": "0.2.4",
-    "cli-color": "0.2.3"
+    "shelljs": "0.2.4"
   },
   "devDependencies": {
     "mocha": "1.12.1",
-    "commander": "2.0.0"
+    "jsdox": "0.2.2",
+    "jshint": "2.1.10",
+    "plato": "0.6.2",
+    "commander": "2.0.0",
+    "subtool": "https://github.com/subtub/subtool/archive/v0.0.2.tar.gz"
   }
 }
