@@ -1,12 +1,13 @@
 var assert = require('assert');
+var program = require('commander');
 var update = require('../lib/update');
-var pkg = require('../package.json');
+var pkgVersion = require('../package.json').version;
 
 
-var pkgJsonOlder   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_older.json';
-var pkgJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
-var pkgJsonCurrent = 'https://raw.github.com/subtub/commander-utils/master/package_newer.json';
-var pkgJsonFail    = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_fail.json';
+var urlPackageJsonOlder   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_older.json';
+var urlPackageJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
+var urlPackageJsonCurrent = 'https://raw.github.com/subtub/commander-utils/master/package.json';
+var urlPackageJsonFail    = 'https://not/correct/url';
 
 
 describe('lib/update.js', function() {
@@ -20,25 +21,42 @@ describe('lib/update.js', function() {
     });
   });
 
+  describe('#requestLatestVersion()', function() {
+    it('should return the version.', function() {
+      update.requestLatestVersion(urlPackageJsonOlder, function(data) {
+        assert.equal('0.0.0', data);
+      });
+    });
+    it('should return the version.', function() {
+      update.requestLatestVersion(urlPackageJsonNewer, function(data) {
+        assert.equal('99.0.0', data);
+      });
+    });
+    it('should return false.', function() {
+      update.requestLatestVersion(urlPackageJsonFail, function(data) {
+        assert.equal(false, data.state);
+      });
+    });
+  });
+
   describe('#requestAndCheck()', function() {
     it('should return false if the request failed (url not valid).', function() {
-      update.requestAndCheck(pkgJsonFail, pkg, {check: true}, function(data) {
-        console.log(data);
+      update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonFail, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(false, data);
       });
     });
     it('should return true (newer).', function() {
-      update.requestAndCheck(pkgJsonNewer, pkg, {check: true}, function(data) {
+      update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonNewer, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(true, data);
       });
     });
-    it('should return true (older).', function() {
-      update.requestAndCheck(pkgJsonOlder, pkg, {check: true}, function(data) {
+    it('should return false (older).', function() {
+      update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonOlder, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(false, data);
       });
     });
-    it('should return true (current).', function() {
-      update.requestAndCheck(pkgJsonCurrent, pkg, {check: true}, function(data) {
+    it('should return false (current).', function() {
+      update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonCurrent, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(false, data);
       });
     });
