@@ -17,7 +17,10 @@ docs:
 readme: docs
 	@node node_modules/subtool/bin/subtool readme
 
+readme-git: docs
+	@node node_modules/subtool/bin/subtool readme -g
+
 report:
 	@node node_modules/.bin/plato -r --title "commander-utils" --dir report lib
 
-.PHONY: hint test docs readme report
+.PHONY: hint test docs readme report readme-git
