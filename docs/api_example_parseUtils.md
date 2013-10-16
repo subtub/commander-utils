@@ -1,4 +1,5 @@
-
-    program
-      .parse(process.argv)
-      .parseUtils();
+```js
+program
+  .parse(process.argv)
+  .parseUtils();
+```
