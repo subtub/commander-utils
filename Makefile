@@ -7,6 +7,8 @@ COMMON_MAKEFILES_PATH=node_modules/CommonMakefiles
 include $(COMMON_MAKEFILES_PATH)/index.make
 include $(COMMON_MAKEFILES_PATH)/node/all.make
 
+MOCHA_TIMEOUT = 30000
+
 
 API_PATH = docs/api.md
 API_TMP_PATH = docs/index.md
