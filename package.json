@@ -22,6 +22,7 @@
     "jshint": "2.1.10",
     "plato": "0.6.2",
     "commander": "2.0.0",
-    "subtool": "https://github.com/subtub/subtool/archive/v0.0.5.tar.gz"
+    "subtool": "https://github.com/subtub/subtool/archive/v0.0.5.tar.gz",
+    "CommonMakefiles": "https://github.com/subtub/CommonMakefiles/archive/v0.0.1.tar.gz"
   }
 }
