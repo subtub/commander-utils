@@ -1,4 +1,4 @@
-# commander-utils v0.0.5  
+# commander-utils v0.1.0  
 
 [![Build Status](https://travis-ci.org/subtub/commander-utils.png?branch=master)](https://travis-ci.org/subtub/commander-utils)
 
@@ -12,15 +12,26 @@
 
 ## General Information
 
-some commander.js utility functions  
+The `commander-utils` module add some useful functions to the `commander.js` module.
+
+_[back to table of content](#table-of-content)_
 ## Installation
 
+Install the `commander-utils` by running:
+
     npm install https://github.com/subtub/commander-utils/tarball/master
+
+If you want to add the module to `package.json` paste this line:
+
+    "commander-utils": "https://github.com/subtub/commander-utils/archive/v0.1.0.tar.gz"
+
+_[back to table of content](#table-of-content)_
 ## Examples
 
-The simple example initialize the utilitie functions to the commander object. Detailed information about the utils can be found at the [API](#api)
+The simple example initialize the utility functions to the `commander.js` object.  
+Detailed information about the utils can be found at the [API](#api)
 
-```
+```js
 #!/usr/bin/env node
 
 /**
@@ -44,9 +55,7 @@ program
 /**
  * Parse the arguments.
  */
-program
-  .parseUtils()
-  .parse(process.argv);
+program.parseUtils(process.argv);
 
 /**
  * If the --foo option is active, do someting.
@@ -58,17 +67,18 @@ if (program.foo) {
 ```
 
 A detailed example can be found at the [examples](/examples) directory.
+
+_[back to table of content](#table-of-content)_
 ## API
  
 parseUtils()
 ------------
-Parse the commands and options.
+Parse the commands and options. The `program.parse` function is included at this function.
 
 **Example**
-
-    program
-      .parse(process.argv)
-      .parseUtils();
+```js
+program.parseUtils(process.argv);
+```
 
 
 
@@ -77,22 +87,28 @@ Parse the commands and options.
 
 *Commander*,  The commander object.
 
-setVersionLong(config)
-----------------------
-Set the version (long) of the cli tool.
+setVersionLong(versionLong)
+---------------------------
+Set a long version of the cli tool. So we can add a codename or some other stuff.
+If no long version was set, we use the `package.json` version.
 
 **Example**
-
 <pre>program.setVersionLong('v1.0.0 codename Release1');</pre>
 
 
+
 **Parameters**
 
-**config**,  The example snippets we want to print out.
+**versionLong**:  *String*,  A long version.
 
-setDescription(The)
--------------------
+**Returns**
+
+*Commander*,  The commander.js object.
+
+setDescription(description)
+---------------------------
 Set the description of the cli tool.
+If no description was set, we use the `package.json` description.
 
 **Example**
 <pre>program.setDescription('v1.0.0 codename Release1');</pre>
@@ -101,40 +117,49 @@ Set the description of the cli tool.
 
 **Parameters**
 
-**The**:  *String*,  project description.
+**description**:  *String*,  The project description.
 
-setUpdate(The)
---------------
-Set the description of the cli tool.
+**Returns**
+
+*Commander*,  The commander.js object.
+
+setUpdate(update)
+-----------------
+Set the update settings for the cli tool.
 
 **Example**
-<pre>program.setDescription('v1.0.0 codename Release1');</pre>
+<pre>program.setUpdate('v1.0.0 codename Release1');</pre>
 
 
 
 **Parameters**
 
-**The**:  *Object*,  update configuration.
+**update**:  *Object*,  The update configuration.
+
+**Returns**
+
+*Commander*,  The commander.js object.
 
 commandExample(config)
 ----------------------
-Print an usage description for an option or command.
+Print out an usage description for an option or command.
 
 **Example**
-
-    .on('--help', function() {  
-        program.commandExample({  
-        [ description: 'Description you want to display.',  
-          usage: 'cli cmd -o' ]
-      })
-    })
+```js
+.on('--help', function() {  
+    program.commandExample({  
+    [ description: 'Description you want to display.',  
+      usage: 'cli cmd -o' ]
+  })
+})
+```
 
 
 
 
 **Parameters**
 
-**config**,  The example snippets we want to print out.
+**config**:  *Object*,  The example snippets we want to print out.
 
 log.setSilent(silent)
 ---------------------
@@ -172,8 +197,8 @@ Set the log colorless boolean
 
 *Object*,  The log config object.
 
-log.info(\[message\])
----------------------
+log.info(message)
+-----------------
 Log a info message.
 
 **Example**
@@ -183,14 +208,14 @@ Log a info message.
 
 **Parameters**
 
-**[message]**:  *String*,  The message we want to log.
+**message**:  *String*,  The message we want to log.
 
 **Returns**
 
 *String*,  The message we set at this function.
 
-log.warn(\[message\])
----------------------
+log.warn(message)
+-----------------
 Log a warn message.
 
 **Example**
@@ -200,30 +225,53 @@ Log a warn message.
 
 **Parameters**
 
-**[message]**:  *String*,  The message we want to log.
+**message**:  *String*,  The message we want to log.
 
 **Returns**
 
 *String*,  The message we set at this function.
 
+log.error(message)
+------------------
+Log an error message.
+
+**Example**
+<pre>program.log.error('hello error');</pre>
+
+
+
+**Parameters**
+
+**message**:  *String*,  The message we want to log.
+
+**Returns**
+
+*String*,  The message we set at this function.
+
+
+_[back to table of content](#table-of-content)_
 ## Running Tests
 
 Clone the repository, install node modules and run the test with the following command:
 
     npm test
+
+_[back to table of content](#table-of-content)_
 ## Contributors
 
 ```
  project  : commander-utils
- repo age : 3 weeks
- active   : 12 days
- commits  : 110
- files    : 22
+ repo age : 4 weeks
+ active   : 14 days
+ commits  : 133
+ files    : 21
  authors  : 
-   110	Paul Vollmer            100,0%
+   133	Paul Vollmer            100,0%
 
 ```
 
+
+_[back to table of content](#table-of-content)_
 ## License
 
 ```
@@ -250,6 +298,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.  
   ```
 
+_[back to table of content](#table-of-content)_
+
+
 ---
 
-*This Readme was generated by [subtool](https://www.github.com/subtub/subtool/releases/tag/v0.0.5) on Tue Oct 15 2013 13:02:32 GMT+0200 (CEST).*  
+*This Readme was generated by [subtool](https://www.github.com/subtub/subtool/releases/tag/v0.1.0) on Mon Oct 21 2013 11:18:11 GMT+0200 (CEST).*  
