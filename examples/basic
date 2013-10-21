@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+/**
+ * This example shows the smallest application scenario.
+ */
+
+
+/**
+ * Module dependencies.
+ */
+var program = require('commander');
+var CommanderUtils = require('../');
+
+/**
+ * Initialize the commander-utils module.
+ */
+CommanderUtils(program);
+
+/**
+ * Parse the arguments.
+ */
+program.parseUtils(process.argv);
