@@ -1,7 +1,7 @@
 {
   "name": "commander-utils",
   "version": "0.1.0",
-  "description": "some commander.js utility functions",
+  "description": "The commander-utils module add some useful functions to the commander.js module.",
   "repository": {
     "type": "git",
     "url": "https://github.com/subtub/commander-utils.git"
