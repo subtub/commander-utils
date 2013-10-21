@@ -9,3 +9,18 @@
   })
 })
 ```
+
+Print out the following lines to console:
+
+```
+  Description:
+    description of the command you want to display.
+
+  Usage Examples:
+    # description of the example
+    $ cli cmd -o
+
+    # an other description
+    $ cli othercmd -f
+
+```
