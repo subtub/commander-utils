@@ -1,10 +1,13 @@
 {
   "name": "commander-utils",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "some commander.js utility functions",
   "repository": {
     "type": "git",
     "url": "https://github.com/subtub/commander-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/subtub/commander-utils/issues"
   },
   "main": "lib/index.js",
   "scripts": {
@@ -14,14 +17,15 @@
     "request": "2.27.0",
     "semver": "2.1.0",
     "prompt": "0.2.11",
-    "shelljs": "0.2.4"
+    "shelljs": "0.2.6"
   },
   "devDependencies": {
-    "mocha": "1.12.1",
+    "mocha": "1.13.0",
     "jsdox": "0.2.2",
-    "jshint": "2.1.10",
+    "jshint": "2.3.0",
     "plato": "0.6.2",
     "commander": "2.0.0",
-    "subtool": "https://github.com/subtub/subtool/archive/v0.0.4.tar.gz"
+    "subtool": "https://github.com/subtub/subtool/archive/v0.0.5.tar.gz",
+    "CommonMakefiles": "https://github.com/subtub/CommonMakefiles/archive/v0.0.1.tar.gz"
   }
 }

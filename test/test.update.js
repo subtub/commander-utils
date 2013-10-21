@@ -4,9 +4,8 @@ var update = require('../lib/update');
 var pkgVersion = require('../package.json').version;
 
 
-var urlPackageJsonOlder   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_older.json';
-var urlPackageJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
 var urlPackageJsonCurrent = 'https://raw.github.com/subtub/commander-utils/master/package.json';
+var urlPackageJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
 var urlPackageJsonFail    = 'https://not/correct/url';
 
 
@@ -22,42 +21,43 @@ describe('lib/update.js', function() {
   });
 
   describe('#requestLatestVersion()', function() {
-    it('should return the version.', function() {
-      update.requestLatestVersion(urlPackageJsonOlder, function(data) {
-        assert.equal('0.0.0', data);
+    it('should return the version 0.0.5.', function(done) {
+      update.requestLatestVersion(urlPackageJsonCurrent, function(data) {
+        assert.equal('0.0.5', data.version);
+        done();
       });
     });
-    it('should return the version.', function() {
+    it('should return the version 99.0.0.', function(done) {
       update.requestLatestVersion(urlPackageJsonNewer, function(data) {
-        assert.equal('99.0.0', data);
+        assert.equal('99.0.0', data.version);
+        done();
       });
     });
-    it('should return false.', function() {
+    it('should return false.', function(done) {
       update.requestLatestVersion(urlPackageJsonFail, function(data) {
         assert.equal(false, data.state);
+        done();
       });
     });
   });
 
   describe('#requestAndCheck()', function() {
-    it('should return false if the request failed (url not valid).', function() {
+    it('should return false if the request failed (url not valid).', function(done) {
       update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonFail, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(false, data);
+        done();
       });
     });
-    it('should return true (newer).', function() {
+    it('should return true (newer).', function(done) {
       update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonNewer, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(true, data);
+        done();
       });
     });
-    it('should return false (older).', function() {
-      update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonOlder, version: pkgVersion}, {check: true}, function(data) {
-        assert.equal(false, data);
-      });
-    });
-    it('should return false (current).', function() {
+    it('should return false (current).', function(done) {
       update.requestAndCheck(program, {packageJsonUrl: urlPackageJsonCurrent, version: pkgVersion}, {check: true}, function(data) {
         assert.equal(false, data);
+        done();
       });
     });
   });

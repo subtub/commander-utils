@@ -1,7 +1,8 @@
-
-    .on('--help', function() {  
-        program.commandExample({  
-        [ description: 'Description you want to display.',  
-          usage: 'cli cmd -o' ]
-      })
-    })
+```js
+.on('--help', function() {  
+    program.commandExample({  
+    [ description: 'Description you want to display.',  
+      usage: 'cli cmd -o' ]
+  })
+})
+```
