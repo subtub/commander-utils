@@ -32,6 +32,22 @@ describe('lib/index.js', function() {
   //     })
   //   })
   // })
+  
+  describe('#commandExample()', function() {
+    it('should return the example string.', function() {
+      var result = program.commandExample({  
+        description: 'description of the command you want to display.',  
+        examples: [{description: 'description of the example',
+                    command:     'cli cmd -o'}]
+      })
+      var expected = '  Description:\n\n'+
+                     '    description of the command you want to display.\n\n'+
+                     '  Usage Examples:\n'+
+                     '    # description of the example\n'+
+                     '    $ cli cmd -o\n\n'
+      assert.equal( expected, result );
+    });
+  });
 
   describe('#log()', function() {
 
