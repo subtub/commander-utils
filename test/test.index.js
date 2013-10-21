@@ -44,7 +44,25 @@ describe('lib/index.js', function() {
                      '    description of the command you want to display.\n\n'+
                      '  Usage Examples:\n'+
                      '    # description of the example\n'+
-                     '    $ cli cmd -o\n\n'
+                     '    $ cli cmd -o\n\n';
+      assert.equal( expected, result );
+    });
+    it('should return the example string (multiple lines at the main description and two or more examples).', function() {
+      var result = program.commandExample({  
+        description: 'description of the command you want to display.\nAlso works with multiple lines.',  
+        examples: [{description: 'description one',
+                    command:     'cli cmd1 -o'},
+                   {description: 'description two',
+                    command:     'cli cmd2 -o'}]
+      })
+      var expected = '  Description:\n\n'+
+                     '    description of the command you want to display.\n'+
+                     '    Also works with multiple lines.\n\n'+
+                     '  Usage Examples:\n'+
+                     '    # description one\n'+
+                     '    $ cli cmd1 -o\n\n'+
+                     '    # description two\n'+
+                     '    $ cli cmd2 -o\n\n';
       assert.equal( expected, result );
     });
   });
