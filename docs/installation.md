@@ -6,4 +6,4 @@ Install the `commander-utils` by running:
 
 If you want to add the module to `package.json` paste this line:
 
-    "commander-utils": "https://github.com/subtub/commander-utils/archive/v0.0.5.tar.gz"
+    "commander-utils": "https://github.com/subtub/commander-utils/archive/v0.1.0.tar.gz"
