@@ -1,5 +1,3 @@
 ```js
-program
-  .parse(process.argv)
-  .parseUtils();
+program.parseUtils(process.argv);
 ```

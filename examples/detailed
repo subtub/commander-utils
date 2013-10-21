@@ -54,9 +54,7 @@ program
 /**
  * Parse the arguments.
  */
-program
-  .parseUtils()
-  .parse(process.argv);
+program.parseUtils(process.argv);
 
 /**
  * If the --baz option is active, do someting.

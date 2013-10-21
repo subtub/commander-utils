@@ -21,9 +21,7 @@ program
 /**
  * Parse the arguments.
  */
-program
-  .parseUtils()
-  .parse(process.argv);
+program.parseUtils(process.argv);
 
 /**
  * If the --foo option is active, do someting.
