@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 /**
+ * This example shows how you can setup the update command.
+ */
+
+
+/**
  * Module dependencies.
  */
 var program = require('commander');

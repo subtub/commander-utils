@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 /**
+ * This example integrates some package.json information.
+ */
+
+
+/**
  * Module dependencies.
  */
 var program = require('commander');
