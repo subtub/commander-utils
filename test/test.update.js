@@ -21,9 +21,9 @@ describe('lib/update.js', function() {
   });
 
   describe('#requestLatestVersion()', function() {
-    it('should return the version 0.1.0.', function(done) {
+    it('should return the version 0.1.1.', function(done) {
       update.requestLatestVersion(urlPackageJsonCurrent, function(data) {
-        assert.equal('0.1.0', data.version);
+        assert.equal('0.1.1', data.version);
         done();
       });
     });
