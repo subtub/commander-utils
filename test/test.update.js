@@ -4,7 +4,6 @@ var update = require('../lib/update');
 var pkgVersion = require('../package.json').version;
 
 
-var urlPackageJsonCurrent = 'https://raw.github.com/subtub/commander-utils/master/package.json';
 var urlPackageJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
 var urlPackageJsonFail    = 'https://not/correct/url';
 
@@ -21,12 +20,6 @@ describe('lib/update.js', function() {
   });
 
   describe('#requestLatestVersion()', function() {
-    it('should return the version 0.1.1.', function(done) {
-      update.requestLatestVersion(urlPackageJsonCurrent, function(data) {
-        assert.equal('0.1.1', data.version);
-        done();
-      });
-    });
     it('should return the version 99.0.0.', function(done) {
       update.requestLatestVersion(urlPackageJsonNewer, function(data) {
         assert.equal('99.0.0', data.version);
