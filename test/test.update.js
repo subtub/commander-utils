@@ -4,6 +4,7 @@ var update = require('../lib/update');
 var pkgVersion = require('../package.json').version;
 
 
+var urlPackageJsonCurrent = 'https://raw.github.com/subtub/commander-utils/master/package.json';
 var urlPackageJsonNewer   = 'https://raw.github.com/subtub/commander-utils/master/test/files/package_newer.json';
 var urlPackageJsonFail    = 'https://not/correct/url';
 
