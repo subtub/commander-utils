@@ -8,31 +8,7 @@ CommanderUtils(program, {
 
 
 describe('lib/index.js', function() {
-  
-  // describe('#setVersion()', function() {
-  //   it('should return the version set at package.json.', function() {
-  //     program.setVersion();
-  //     console.log( program.Commander );
-  //     assert.equal( '0.0.2', program.Commander );
-  //   })
-  //   it('should return the version from the parameter.', function() {
-  //     assert.equal( '1.0.0', program.setVersion('1.0.0') );
-  //   })
-  // })
-
-  // describe('#requestPackageJson()', function() {
-  //   it('should return the requested package.json as object.', function() {
-  //     program.requestPackageJson('https://github.com/subtub/commander-utils/raw/master/package.json', function(data) {
-  //       assert.equal( typeof data === 'object', data );
-  //     })
-  //   })
-  //   it('should return false if the request end with an error.', function() {
-  //     program.requestPackageJson('not/correct/url', function(data) {
-  //       assert.equal( false, data );
-  //     })
-  //   })
-  // })
-  
+    
   describe('#commandExample()', function() {
     it('should return the example string.', function() {
       var result = program.commandExample({  
