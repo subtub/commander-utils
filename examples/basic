@@ -2,6 +2,7 @@
 
 /**
  * This example shows the smallest application scenario.
+ * It will add option --silent and --colorless to the cli.
  */
 
 
