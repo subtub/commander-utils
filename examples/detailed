@@ -54,7 +54,7 @@ program
  * Add an option to the commandline interface.
  */
 program
-  .option('-b, --baz', 'baz stuff')
+  .option('-l, --last-argument', 'get the last argument and print it to console.')
 
 /**
  * Parse the arguments.
@@ -62,8 +62,8 @@ program
 program.parseUtils(process.argv);
 
 /**
- * If the --baz option is active, do someting.
+ * If the --last-arg option is active, do someting.
  */
-if (program.baz) {
-  program.log.info('Baz to the Box');
+if (program.lastArgument) {
+  program.log.info(program.getLastArg());
 };

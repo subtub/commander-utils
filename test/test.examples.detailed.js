@@ -35,8 +35,8 @@ describe('examples/detailed', function() {
     assert.equal(0, exec(path+'subtub --bar').code);
   });
 
-  it('execute the detailed cli with --baz option.', function() {
-    assert.equal(0, exec(path+'--baz').code);
+  it('execute the detailed cli with --last-argument option.', function() {
+    assert.equal(0, exec(path+'--last-argument "hello world"').code);
   });
 
 });
