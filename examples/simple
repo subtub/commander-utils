@@ -2,6 +2,7 @@
 
 /**
  * This example integrates some package.json information.
+ * Also add an example command and description to the --help output.
  */
 
 
@@ -16,6 +17,12 @@ var pkg = require('../package.json');
  * Initialize the commander-utils module.
  */
 CommanderUtils(program, pkg);
+
+/**
+ * Add an example command to the main --help page.
+ */
+program.addExamples([{description: 'description of the example',
+                      command:     'the command'}]);
 
 /**
  * Add an option to the commandline interface.
