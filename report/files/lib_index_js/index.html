@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/index.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+      <p class="stat">69.88</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+      <p class="stat">382</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+      <p class="stat">44.73</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+      <p class="stat">2.16</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/**
+ * Module dependencies.
+ */
+var update = require(&#039;./update&#039;);
+
+
+/**
+ * The Constructor.
+ *
+ * @param {Object} commander The commander.js program.
+ * @param {Object} packageJson The package.json of the project.
+ */
+var CommanderUtils = function(commander, packageJson) {
+  // We need a temporary object to store some data.
+  var tmp = {
+    // Set the commander.js program version.
+    version: null,
+    // 
+    versionLong: &#039;&#039;,
+    // Add a small description about the tool to the help page.
+    description: null,
+    examples: null,
+    bugs: null,
+    update: false,
+    mainHelp: true
+  };
+  // If the packageJson parameter is defined, set some tmp variables.
+  if (packageJson !== undefined) {
+    tmp.version = packageJson.version;
+    tmp.description = packageJson.description;
+    if (packageJson.bugs !== undefined &amp;&amp; packageJson.bugs.url !== undefined) {
+      tmp.bugs = packageJson.bugs.url;
+    }
+  }
+
+  /**
+   * Get the last argument.
+   *
+   * @returns {String} The last argument
+   */
+  commander.getLastArg = function() {
+    return process.argv[process.argv.length-1];
+  };
+
+  /**
+   * Parse the commands and options. The `program.parse` function is included at this function.
+   *
+   * **Example**
+   * {{include:/docs/api_example_parseUtils.md}}
+   *
+   * @returns {Commander} The commander object.
+   */
+  commander.parseUtils = function(argv) {
+    // Add the log options to the commander.js program.
+    commander.option(&#039;-S, --silent&#039;, &#039;logger silent mode&#039;)
+             .option(&#039;-N, --colorless&#039;, &#039;logger disable terminal color&#039;);
+
+    // The update command.
+    // Request the latest package.json and check if a new version was released.
+    // If a new version is available, uninstall the old one and install the latest one.
+    if (tmp.update !== undefined &amp;&amp; tmp.update !== false) {
+      commander
+        .command(&#039;update&#039;)
+        .description(&#039;update the &#039;+tmp.update.name)
+        .option(&#039;-c, --check&#039;, &#039;check if a new version is available&#039;)
+        .action(function(options) {
+          var tmpConfig = {
+            packageJsonUrl: tmp.update.packageJsonUrl,
+            version: tmp.version,
+            name: tmp.update.name,
+            downloadUrl: tmp.update.downloadUrl
+          };
+          update.requestAndCheck(commander, tmpConfig, options, function(data) {
+            
+          });
+        });
+    }
+
+    // Add the version.
+    if (tmp.versionLong === &#039;&#039;) {
+      commander.version(tmp.version);
+    } else {
+      commander.version(tmp.versionLong);
+    }
+
+    // Add some information to the main --help page.
+    if (tmp.mainHelp === true &amp;&amp; tmp.description !== null || tmp.examples !== null) {
+      
+      commander.on(&#039;--help&#039;, function() {
+        if (tmp.description !== null) {
+          // The description header
+          console.log(&#039;  Description:\n&#039;);
+          // split the message and print out each line.
+          //var str = message.toString();
+          var split = tmp.description.split(&#039;\n&#039;);
+          for (var i=0; i&lt;split.length; i++) {
+            if (split[i] !== undefined) {
+              console.log(&#039;    &#039;+split[i]);
+            }
+          }
+          // Description Footer
+          console.log();
+        }
+        if (tmp.examples !== null) {
+          console.log(&#039;  Examples:\n&#039;);
+          for (var e=0; e&lt;tmp.examples.length; e++) {
+            console.log(&#039;    # &#039;+tmp.examples[e].description);
+            console.log(&#039;    $ &#039;+tmp.examples[e].command);
+            console.log();
+          }
+        }
+        if (tmp.bugs !== null) {
+          console.log(&#039;\n  Report bugs to &lt;&#039;+tmp.bugs+&#039;&gt;\n&#039;);
+        }
+      });
+    }
+    
+    // commander.js parse
+    commander.parse(argv);
+
+    // If no arguments exist, show help
+    if (argv.length === 2) {
+      commander.help();
+    }
+
+    // Check the log options
+    if (commander.silent) {
+      this.log.config.silent = true;
+    }
+    if (commander.colorless) {
+      this.log.config.colorless = true;
+    }
+
+    return commander;
+  };
+
+  /**
+   * Set a long version of the cli tool. So we can add a codename or some other stuff.
+   * If no long version was set, we use the `package.json` version.
+   *
+   * **Example**
+   * &lt;pre&gt;program.setVersionLong(&#039;v1.0.0 codename Release1&#039;);&lt;/pre&gt;
+   *
+   * @param {String} versionLong A long version.
+   * @returns {Commander} The commander.js object.
+   */
+  commander.setVersionLong = function(versionLong) {
+    tmp.versionLong = versionLong;
+    return commander;
+  };
+
+  /**
+   * Set the description of the cli tool.
+   * If no description was set, we use the `package.json` description.
+   *
+   * **Example**
+   * &lt;pre&gt;program.setDescription(&#039;v1.0.0 codename Release1&#039;);&lt;/pre&gt;
+   *
+   * @param {String} description The project description.
+   * @returns {Commander} The commander.js object.
+   */
+  commander.setDescription = function(description) {
+    tmp.description = description;
+    return commander;
+  };
+
+  /**
+   * Add examples to the main --help output.
+   *
+   * **Example**
+   * {{include:/docs/api_example_addExamples.md}}
+   *
+   * @param {Object} The example as object.
+   * @returns {Commander} The commander.js object.
+   */
+  commander.addExamples = function(obj) {
+    tmp.examples = obj;
+    return commander;
+  };
+
+
+  /**
+   * Set the update settings for the cli tool.
+   *
+   * **Example**
+   * &lt;pre&gt;program.setUpdate(&#039;v1.0.0 codename Release1&#039;);&lt;/pre&gt;
+   *
+   * @param {Object} update The update configuration.
+   * @returns {Commander} The commander.js object.
+   */
+  commander.setUpdate = function(update) {
+    tmp.update = update;
+    return commander;
+  };
+
+  /**
+   * Print no --help content if no command or option was set.
+   * This can be used if you want to process something without other commands or options.
+   * This overrides the default settings.
+   *
+   * @returns {Commander} The commander.js object.
+   */
+  commander.noMainHelp = function() {
+    tmp.mainHelp = false;
+    return commander;
+  };
+
+  /**
+   * Print out an usage description for an option or command.
+   *
+   * **Example**
+   * {{include:/docs/api_example_commandExample.md}}
+   *
+   * @param {Object} config The example snippets we want to print out.
+   */
+  commander.commandExample = function(config) {
+    if (config !== undefined) {
+      var content = &#039;&#039;;
+      if (config.description !== undefined) {
+        content += &#039;  Description:\n\n&#039;;
+        var tmp = config.description.split(&#039;\n&#039;);
+        for (var i=0; i&lt;tmp.length; i++) {
+          content += &#039;    &#039;+tmp[i]+&#039;\n&#039;;
+        }
+        content += &#039;\n&#039;;
+      }
+      // Print some usage examples to the console.
+      if (config.examples !== undefined) {
+        content += &#039;  Usage Examples:\n&#039;;
+        for (var x=0; x&lt;config.examples.length; x++) {
+          if (config.examples[x].command !== undefined) {
+            if (config.examples[x].description !== undefined) {
+              var descriptionSplitted = config.examples[x].description.split(&#039;\n&#039;);
+              for (var j=0; j&lt;descriptionSplitted.length; j++) {
+                content += &#039;    # &#039;+descriptionSplitted[j]+&#039;\n&#039;;
+              }
+            }
+            content += &#039;    $ &#039;+config.examples[x].command+&#039;\n\n&#039;;
+          }
+        }
+      }
+      console.log(content);
+      return content;
+    }
+  };
+
+  /**
+   * The log object.
+   */
+  commander.log = {
+    // Log configuration.
+    config: {
+      silent: false,
+      colorless: false
+    },
+
+    /**
+     * Set the log silent boolean
+     *
+     * **Example**
+     * &lt;pre&gt;program.log.setSilent(false);&lt;/pre&gt;
+     *
+     * @function log.setSilent
+     * @param {Boolean} silent
+     * @returns {Object} The log config object.
+     */
+    setSilent: function(silent) {
+      this.config.silent = silent;
+      return this.config;
+    },
+
+    /**
+     * Set the log colorless boolean
+     *
+     * **Example**
+     * &lt;pre&gt;program.log.setColorless(false);&lt;/pre&gt;
+     *
+     * @function log.setColorless
+     * @param {Boolean} colorless
+     * @returns {Object} The log config object.
+     */
+    setColorless: function(colorless) {
+      this.config.colorless = colorless;
+      return this.config;
+    },
+
+    /**
+     * Log a info message.
+     *
+     * **Example**
+     * &lt;pre&gt;program.log.info(&#039;hello world&#039;);&lt;/pre&gt;
+     *
+     * @function log.info
+     * @param {String} message The message we want to log.
+     * @returns {String} The message we set at this function.
+     */
+    info: function(message) {
+      if (this.config.silent === false) {
+        if (this.config.colorless === false) {
+          console.log(ansi.green(message));
+        } else {
+          console.log(message);
+        }
+      }
+      return message;
+    },
+
+    /**
+     * Log a warn message.
+     *
+     * **Example**
+     * &lt;pre&gt;program.log.warn(&#039;hello warn&#039;);&lt;/pre&gt;
+     *
+     * @function log.warn
+     * @param {String} message The message we want to log.
+     * @returns {String} The message we set at this function.
+     */
+    warn: function(message) {
+      if (this.config.colorless === false) {
+        console.log(ansi.yellow(message));
+      } else {
+        console.log(message);
+      }
+      return message;
+    },
+
+    /**
+     * Log an error message.
+     *
+     * **Example**
+     * &lt;pre&gt;program.log.error(&#039;hello error&#039;);&lt;/pre&gt;
+     *
+     * @function log.error
+     * @param {String} message The message we want to log.
+     * @returns {String} The message we set at this function.
+     */
+    error: function(message) {
+      if (this.config.colorless === false) {
+        console.log(ansi.red(message));
+      } else {
+        console.log(message);
+      }
+      return message;
+    },
+  };
+
+};
+
+module.exports = CommanderUtils;
+
+/**
+ * Some ANSI Escape codes we want to use.
+ */
+var ansi = {
+  reset: function() {
+    return &#039;\033[0m&#039;;
+  },
+  bold: function(message) {
+    return &#039;\033[1m&#039;+message+this.reset();
+  },
+  black: function(message) {
+    return &#039;\033[30m&#039;+message+this.reset();
+  },
+  red: function(message) {
+    return &#039;\033[31m&#039;+message+this.reset();
+  },
+  green: function(message) {
+    return &#039;\033[32m&#039;+message+this.reset();
+  },
+  yellow: function(message) {
+    return &#039;\033[33m&#039;+message+this.reset();
+  },
+  blue: function(message) {
+    return &#039;\033[34m&#039;+message+this.reset();
+  },
+  magenta: function(message) {
+    return &#039;\033[35m&#039;+message+this.reset();
+  },
+  cyan: function(message) {
+    return &#039;\033[36m&#039;+message+this.reset();
+  },
+  white: function(message) {
+    return &#039;\033[37m&#039;+message+this.reset();
+  }
+};</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
