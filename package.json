@@ -1,6 +1,6 @@
 {
   "name": "commander-utils",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The commander-utils module add some useful functions to the commander.js module.",
   "repository": {
     "type": "git",
@@ -30,6 +30,6 @@
     "plato": "0.6.2",
     "commander": "2.0.0",
     "subtool": "https://github.com/subtub/subtool/archive/v0.0.5.tar.gz",
-    "CommonMakefiles": "https://github.com/subtub/CommonMakefiles/archive/v0.1.2.tar.gz"
+    "common-makefiles": "0.2.0"
   }
 }
